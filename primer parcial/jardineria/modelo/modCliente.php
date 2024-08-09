@@ -30,9 +30,9 @@ class Cliente{
         $this->region="";
         $this->pais="";
         $this->codigo_postal="";
-        $this->codigo_empleado_rep_ventas=null;
-        $this->limite_credito=null;
-        $this->con=new connectionBase();
+        $this->codigo_empleado_rep_ventas="";
+        $this->limite_credito=0;
+        $this->con=new conexionBase();
     }
     public function setCodigo_cliente($v){
         $this->codigo_cliente=$v;
@@ -120,7 +120,7 @@ class Cliente{
     }
     public function registrarCliente(){
         $this->con->createConnection();
-        $sql="insert into empleado (nombre_cliente,nombre_contacto,apellido_contacto,telefono,fax,linea_direccion1,linea_direccion2,ciudad,region,pais,codigo_postal,limite_credito) values ('$this->nombre_cliente','$this->nombre_contacto','$this->apellido_contacto','$this->telefono','$this->fax','$this->linea_direccion1','$this->linea_direccion2','$this->ciudad','$this->region','$this->pais','$this->codigo_postal','$this->limite_credito')"
+        $sql="insert into cliente (nombre_cliente,nombre_contacto,apellido_contacto,telefono,fax,linea_direccion1,linea_direccion2,ciudad,region,pais,codigo_postal,limite_credito) values ('$this->nombre_cliente','$this->nombre_contacto','$this->apellido_contacto','$this->telefono','$this->fax','$this->linea_direccion1','$this->linea_direccion2','$this->ciudad','$this->region','$this->pais','$this->codigo_postal','$this->limite_credito')";
         $this->con->executeQuery($sql);
     }
 }

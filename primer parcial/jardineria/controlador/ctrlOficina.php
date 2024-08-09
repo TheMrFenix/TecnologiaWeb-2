@@ -1,7 +1,6 @@
 <?php
 include_once "../modelo/modOficina.php";
 $oficina=new Oficina();
-$codigo_oficina=htmlspecialchars($_POST['codigo_oficina']);
 $ciudad=htmlspecialchars($_POST['ciudad']);
 $pais=htmlspecialchars($_POST['pais']);
 $region=htmlspecialchars($_POST['region']);
@@ -9,7 +8,6 @@ $codigoPostal=htmlspecialchars($_POST['codigoPostal']);
 $telefono=htmlspecialchars($_POST['telefono']);
 $lineaDireccion1=htmlspecialchars($_POST['lineaDireccion1']);
 $lineaDireccion2=htmlspecialchars($_POST['lineaDireccion2']);
-$oficina->setcodigo_Oficina($codigo_oficina);
 $oficina->setCiudad($ciudad);
 $oficina->setPais($pais);
 $oficina->setRegion($region);

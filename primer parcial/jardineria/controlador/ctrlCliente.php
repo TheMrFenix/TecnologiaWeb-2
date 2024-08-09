@@ -12,7 +12,6 @@ $ciudad=htmlspecialchars($_POST['ciudad']);
 $region=htmlspecialchars($_POST['region']);
 $pais=htmlspecialchars($_POST['pais']);
 $codigo_postal=htmlspecialchars($_POST['codigo_postal']);
-$codigo_empleado_rep_ventas=htmlspecialchars($_POST['codigo_empleado_rep_ventas']);
 $limite_credito=htmlspecialchars($_POST['limite_credito']);
 $cliente->setNombre_cliente($nombre_cliente);
 $cliente->setNombre_contacto($nombre_contacto);

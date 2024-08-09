@@ -19,10 +19,10 @@ class Empleado{
         $this->apellido2="";
         $this->extension="";
         $this->email="";
-        $this->codigo_oficina="";
-        $this->codigo_jefe="";
+        $this->codigo_oficina=null;
+        $this->codigo_jefe=null;
         $this->puesto="";
-        $this->con=new connectionBase();
+        $this->con=new conexionBase();
     }
         public function setCodigo_empleado($v){
             $this->codigo_empleado=$v;
@@ -70,7 +70,7 @@ class Empleado{
             $this->codigo_jefe=$v;
         }
         public function getCodigo_jefe(){
-            return->codigo_jefe;
+            return $this->codigo_jefe;
         }
         public function setPuesto($v){
             $this->puesto=$v;
@@ -79,8 +79,8 @@ class Empleado{
             return $this->puesto;
         }
         public function registrarEmpleado(){
-            $this->con->createConnetion();
-            $sql="insert into empleado (nombre,apellido1,apellido2,extension,email,codigo_oficina,puesto) values ('$this->nombre','$this->apelldio1','$this->apellido2','$this->extension','$this->email','$this->codigo_oficina','$this->puesto')";
+            $this->con->createConnection();
+            $sql="insert into empleado (nombre,apellido1,apellido2,extension,email,puesto) values ('$this->nombre','$this->apellido1','$this->apellido2','$this->extension','$this->email','$this->puesto')";
             $this->con->executeQuery($sql);
         }
 }

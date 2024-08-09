@@ -12,7 +12,7 @@ class Oficina{
     private $lineaDireccion2;
     private $con;
     function __construct(){
-        $this->codigo_oficina="";
+        $this->codigo_oficina=null;
         $this->ciudad="";
         $this->pais="";
         $this->region="";
@@ -22,10 +22,10 @@ class Oficina{
         $this->lineaDireccion2="";
         $this->con=new conexionBase();
     }
-    public function setcodigo_Oficina($v){
+    public function setCodigo_oficina($v){
         $this->codigo_oficina=$v;
     }
-    public function getcodigo_Oficina($v){
+    public function getCodigo_oficina(){
         return $this->codigo_oficina;
     }
     public function setCiudad($v){
@@ -61,7 +61,7 @@ class Oficina{
     public function setLineaDireccion1($v){
         $this->lineaDireccion1=$v;
     }
-    public function getLineaDireccion1($v){
+    public function getLineaDireccion1(){
         return $this->lineaDireccion1;
     }
     public function setLineaDireccion2($v){
@@ -72,7 +72,7 @@ class Oficina{
     }
     public function registrarOficina(){
         $this->con->createConnection();
-        $sql="insert into oficina (codigo_oficina,ciudad,pais,region,codigo_postal,telefono,linea_direccion1,linea_direccion2) values ('$this->codigo_oficina','$this->ciudad','$this->pais','$this->region','$this->codigoPostal','$this->telefono','$this->lineaDireccion1','$this->lineaDireccion2')";
+        $sql="insert into oficina (ciudad,pais,region,codigo_postal,telefono,linea_direccion1,linea_direccion2) values ('$this->ciudad','$this->pais','$this->region','$this->codigoPostal','$this->telefono','$this->lineaDireccion1','$this->lineaDireccion2')";
         $this->con->executeQuery($sql);
     }
 }
