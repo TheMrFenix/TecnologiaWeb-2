@@ -26,3 +26,5 @@ $cliente->setPais($pais);
 $cliente->setCodigo_postal($codigo_postal);
 $cliente->setLimite_credito($limite_credito);
 $cliente->registrarCliente();
+
+?>
