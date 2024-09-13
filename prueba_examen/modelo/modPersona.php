@@ -14,7 +14,7 @@ class Persona
     function __construct()
     {
         $this->idPersona = null;
-        $this->nombres = "";
+        $this->nombre = "";
         $this->apellido1 = "";
         $this->apellido2 = "";
         $this->fecha_nacimiento = "";
@@ -82,21 +82,10 @@ class Persona
     public function registrarPersona()
     {
         $this->con->createConnection();
-        $sql="insert into persona (nombres,apellido1,apellido2,fecha_nacimiento,email,telefono) values (
-        '$this->nombres', '$this->apellido1','$this->apellido2','$this->fecha_nacimiento','$this->email','$this->telefono')";
+        $sql="insert into persona (nombre,apellido1,apellido2,fecha_nacimiento,email,telefono) values (
+        '$this->nombre', '$this->apellido1','$this->apellido2','$this->fecha_nacimiento','$this->email','$this->telefono')";
         $this->con->executeQuery($sql);
-    }
-    private function validarEmail($email)
-    {
-        $this->con->createConnection();
-        $sql = "select email from persona where email='$email'";
-        $resp = $this->con->executeQuery($sql);
-        $datos = $this->con->getCountAffectedRows($resp);
-        if ($datos == true) {
-            return true;
-        } else {
-            return false;
-        }
+        $_SESSION['mensaje']="Registro exitoso";
     }
     public function ListarPersona()
     {
@@ -107,14 +96,6 @@ class Persona
         while ($row = mysqli_fetch_assoc($resp)) {
             $data[]=$row;
         }
-        echo json_encode($data);
-    }
-    public function BuscarPersona()
-    {
-        $this->con->createConnection();
-        $sql = "select * from persona where idpersona='$this->idPersona'";
-        $resp = $this->con->executeQuery($sql);
-        $data= mysqli_fetch_assoc($resp);
         echo json_encode($data);
     }
 }

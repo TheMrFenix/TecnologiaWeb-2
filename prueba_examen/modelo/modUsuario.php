@@ -1,20 +1,16 @@
 <?php
-session_start();
-
 include_once "conexion/conexionBase.php";
-class Usuario {
+class Usuario{
     private $idUsuario;
     private $nick;
     private $contraseña;
-    private $fecha_creacion;
     private $estado;
     private $con;
     public function __construct(){
         $this->idUsuario= null;
         $this->nick="";
         $this->contraseña="";
-        $this->fecha_creacion="";
-        $this->estado="";
+        $this->estado=0;
         $this->con=new ConexionBase();
     }
 
@@ -54,16 +50,6 @@ class Usuario {
         $this->contraseña = $contraseña;
     }
 
-    public function getFecha_creacion()
-    {
-        return $this->fecha_creacion;
-    }
-
-    public function setFecha_creacion($fecha_creacion)
-    {
-        $this->fecha_creacion = $fecha_creacion;
-    }
-
     public function getEstado()
     {
         return $this->estado;
@@ -74,13 +60,50 @@ class Usuario {
         $this->estado = $estado;
     }
 
-    public function RegistrarUsuario()
+    public function registrarUsuario()
     {
         $this->con->createConnection();
-        $sql="insert into usuario(nick, contraseña, fecha_creacion, estado)
-values('$this->nick', '$this->contraseña', '$this->fecah_creacion', '$this->estado')";
+        $sql="insert into usuario (nick,contraseña,estado) values (
+        '$this->nick', '$this->contraseña','$this->estado'";
         $this->con->executeQuery($sql);
         $_SESSION['mensaje']="Registro exitoso";
     }
-
+    public function ListarUsuario()
+    {
+        $this->con->createConnection();
+        $sql = "select * from usuario";
+        $resp = $this->con->executeQuery($sql);
+        $data=array();
+        while ($row = mysqli_fetch_assoc($resp)) {
+            $data[]=$row;
+        }
+        echo json_encode($data);
+    }
+    public function login(){
+        $this->con->createConnection();
+        $sql="select * from usuario where nick='$this->nick' and contraseña='$this->contraseña'";
+        $data=$this->con->executeQuery($sql);
+        $row=mysqli_fetch_assoc($data);
+        if($row){
+            $sql="update usuario set estado=1 where idUsuario='$row[idUsuario]'";
+            $this->con->executeQuery($sql);
+            echo json_encode(["mensaje"=>"Sesion abierta"]);
+            echo json_encode(array("status"=>"ok"));
+            die();
+        }
+    }
+    public function logout(){
+        $this->con->createConnection();
+        $sql="select * from usuario where nick='$this->nick' and contraseña='$this->contraseña'";
+        $data=$this->con->executeQuery($sql);
+        $row=mysqli_fetch_assoc($data);
+        if($row){
+            $sql="update usuario set estado=0 where idUsuario='$row[idUsuario]'";
+            $this->con->executeQuery($sql);
+            echo json_encode(["mensaje"=>"Sesion cerrada"]);
+            echo json_encode(array("status"=>"ok"));
+            die();
+        }
+        
+    }
 }
